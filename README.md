@@ -1,12 +1,12 @@
-# rabbitmq-cluster-in-k8s
+# rabbitmq-cluster-on-k8s
 
-       rabbitmq ClusterÔÚkubernetesÖĞ²¿ÊğÊÇ»ùÓÚrabbitmqµÄCluster Formation and Peer Discovery»úÖÆ£¬½øĞĞ½ÚµãµÄ×Ô¶¯·¢ÏÖ£¬·Ç³£·½±ãÊµÏÖ¼¯ÈºµÄºáÏòÀ©Õ¹¡£ÊµÏÖCluster Formation and Peer DiscoveryÊÇÍ¨¹ıÆôÓÃrabbitmq-peer-discovery-k8s²å¼şÊµÏÖµÄ¡£´Ë²å¼şÊÊÓÃÓÚrabbitmq 3.7ÒÔÉÏ°æ±¾£¬3.6°æ±¾¿ÉÒÔ²Î¿¼autocluster¡£±¾²¿Êğ·¶Àı²ÉÓÃµÄ¹Ù·½µÄrabbitmq:3.7.4¾µÏñ¡£
-       1¡¢´´½¨serviceAccount
+       rabbitmq Clusteråœ¨kubernetesä¸­éƒ¨ç½²æ˜¯åŸºäºrabbitmqçš„Cluster Formation and Peer Discoveryæœºåˆ¶ï¼Œè¿›è¡ŒèŠ‚ç‚¹çš„è‡ªåŠ¨å‘ç°ï¼Œéå¸¸æ–¹ä¾¿å®ç°é›†ç¾¤çš„æ¨ªå‘æ‰©å±•ã€‚å®ç°Cluster Formation and Peer Discoveryæ˜¯é€šè¿‡å¯ç”¨rabbitmq-peer-discovery-k8sæ’ä»¶å®ç°çš„ã€‚æ­¤æ’ä»¶é€‚ç”¨äºrabbitmq 3.7ä»¥ä¸Šç‰ˆæœ¬ï¼Œ3.6ç‰ˆæœ¬å¯ä»¥å‚è€ƒautoclusterã€‚æœ¬éƒ¨ç½²èŒƒä¾‹é‡‡ç”¨çš„å®˜æ–¹çš„rabbitmq:3.7.4é•œåƒã€‚
+       1ã€åˆ›å»ºserviceAccount
         kubectl create -f  rbac.yml
 
-       2¡¢´´½¨rabbitmqµÄÅäÖÃÎÄ¼ş
-       ÅäÖÃÎÄ¼ş°üº¬rabbitmq.confºÍenabled_plugins¡£ÆäÖĞrabbitmq.confÎªÖ÷ÅäÖÃÎÄ¼ş£¬enabled_pluginsÊÇrabbitmqÆôÓÃµÄ²å¼ş¡£
-       ÆäÖĞrabbitmq.confÓĞ²¿·Ö²ÎÊıÓÃÓÚpeer discovery¡£
+       2ã€åˆ›å»ºrabbitmqçš„é…ç½®æ–‡ä»¶
+       é…ç½®æ–‡ä»¶åŒ…å«rabbitmq.confå’Œenabled_pluginsã€‚å…¶ä¸­rabbitmq.confä¸ºä¸»é…ç½®æ–‡ä»¶ï¼Œenabled_pluginsæ˜¯rabbitmqå¯ç”¨çš„æ’ä»¶ã€‚
+       å…¶ä¸­rabbitmq.confæœ‰éƒ¨åˆ†å‚æ•°ç”¨äºpeer discoveryã€‚
 
        cluster_formation.k8s.address_type = ip
        cluster_formation.node_cleanup.only_log_warning = false
@@ -14,10 +14,10 @@
        cluster_partition_handling = autoheal
        loopback_users.guest = false
 
-       3¡¢´´½¨statefulset×ÊÔ´
-       4¡¢´´½¨service
-      ²ÉÓÃNodePort±©Â¶web¹ÜÀí¶Ë¿Ú15672ºÍÒµÎñ¶Ë¿Ú5672£¬¿ÉÒÔ¸ù¾İÊµ¼ÊĞèÇó£¬²ÉÓÃingress½øĞĞ¶Ë¿ÚµÄ±©Â¶¡£
+       3ã€åˆ›å»ºstatefulsetèµ„æº
+       4ã€åˆ›å»ºservice
+      é‡‡ç”¨NodePortæš´éœ²webç®¡ç†ç«¯å£15672å’Œä¸šåŠ¡ç«¯å£5672ï¼Œå¯ä»¥æ ¹æ®å®é™…éœ€æ±‚ï¼Œé‡‡ç”¨ingressè¿›è¡Œç«¯å£çš„æš´éœ²ã€‚
       
-       5¡¢¼¯ÈºÀ©Õ¹
-       ¼¯ÈºÀ©Õ¹Í¨¹ıkubectl scaleÀ©Õ¹¼´¿É¡£
+       5ã€é›†ç¾¤æ‰©å±•
+       é›†ç¾¤æ‰©å±•é€šè¿‡kubectl scaleæ‰©å±•å³å¯ã€‚
        kubectl scale statefulset rabbitmq --replicas=num
